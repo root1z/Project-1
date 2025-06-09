@@ -6,3 +6,7 @@ wc -l tmdb-movies.csv
 
 #show the first line of the file and number the fields
 head -n 1 tmdb-movies.csv | tr ',' '\n' | nl
+
+
+# Find lines in a CSV file that have unmatched quotes
+grep -n ',"[^"]*$' tmdb-movies.csv

@@ -14,7 +14,7 @@ awk -F',' '{
         char = substr($0, i, 1)
         if (char == "\"") {
             in_quotes = !in_quotes
-        } else if (char == "," && in_quotes == 0) {
+        } else if (char == "," && !in_quotes) {
             field_count++
             if (field_count == 16) {
                 split(current_field, d, "/")
