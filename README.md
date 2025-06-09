@@ -11,15 +11,16 @@ Dữ liệu trên đang được đặt trên Linux server, cần team Data Engi
 7. Thống kê số lượng phim theo các thể loại. Ví dụ có bao nhiêu phim thuộc thể loại Action, bao nhiêu thuộc thể loại Family, ….
 8. Idea của bạn để có thêm những phân tích cho dữ liệu?
 
-## Requirements
-
-- AWK (GNU Awk)
-- Basic Unix/Linux command-line tools (head, tail, sort, cut)
 
 ## Usage
-
+Gom các dòng line break lại với nhau
 ```bash
-./script.sh
+./data_format.sh
+```
+
+Sắp xếp các bộ phim theo ngày phát hành giảm dần rồi lưu ra một file mới
+```bash
+./sort_date.sh
 ```
 
 The script will:
