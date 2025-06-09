@@ -12,10 +12,10 @@ awk -F',' '{
             in_quotes = !in_quotes
         } else if (char == "," && !in_quotes) {
             field_count++
-            if (field_count == 7) {
-                split(current_field, actors, "|")
-                for (i in actors) {
-                    print actors[i]
+            if (field_count == 9) {
+                split(current_field, director, "|")
+                for (i in director) {
+                    print director[i]
                 }
             }
             current_field = ""
@@ -23,4 +23,4 @@ awk -F',' '{
             current_field = current_field char
         }
     }
-}' tmdb-movies-fixed.csv | sort | uniq -c | sort -nr |head -1 > actor_count.csv
+}' tmdb-movies-fixed.csv | sort | uniq -c | sort -nr |head -1 > director_count.csv

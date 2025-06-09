@@ -23,48 +23,42 @@ Sắp xếp các bộ phim theo ngày phát hành giảm dần rồi lưu ra m�
 ./sort_date.sh
 ```
 
-The script will:
-1. Read the input file `tmdb-movies.csv`
-2. Process and sort the data
-3. Output the sorted results to `sorted_movies.csv`
-
-## How It Works
-
-1. **Header Preservation**: The first line (header) is preserved and not included in the sorting process
-2. **Date Processing**: 
-   - Identifies the date field (field 16)
-   - Converts dates from MM/DD/YY to YYYY-MM-DD
-   - Handles year conversion (YY < 25 → 20YY, YY ≥ 25 → 19YY)
-3. **CSV Parsing**:
-   - Properly handles quoted fields
-   - Maintains field integrity
-4. **Sorting**:
-   - Sorts all data rows based on the converted date
-   - Preserves all original fields
-
-## Input Format
-
-The script expects a CSV file with:
-- Comma-separated values
-- Optional quoted fields
-- Date in MM/DD/YY format in field 16
-
-## Output Format
-
-The output will be a CSV file with:
-- Original header row
-- Sorted data rows (descending order by date)
-- All original fields preserved
-- Dates converted to YYYY-MM-DD format
-
-## Example
-
-Input (field 16):
-```
-12/25/23
+Lọc ra các bộ phim có đánh giá trung bình trên 7.5 rồi lưu ra một file mới
+```bash
+./rate.sh
 ```
 
-Output (field 16):
+Tìm ra phim nào có doanh thu cao nhất và doanh thu thấp nhất
+```bash
+awk -F',' 'NR>1 {gsub(/\./, "", $NF); print $NF}' tmdb-movies-fixed.csv | sort -n | tail -1
 ```
-2023-12-25
+
+Tìm ra phim nào có doanh thu thấp nhất
+```bash
+awk -F',' 'NR>1 {gsub(/\./, "", $NF); print $NF}' tmdb-movies-fixed.csv | sort -n | head -1
+```
+
+Tính tổng doanh thu tất cả các bộ phim
+```bash
+awk -F',' 'NR>1 {gsub(/\./, "", $NF); sum += $NF} END {print "Total revenue:", sum}' tmdb-movies.csv
+```
+
+Top 10 bộ phim đem về lợi nhuận cao nhất
+```bash
+awk -F',' 'NR>1 {gsub(/\./, "", $(NF-1)); gsub(/\./, "", $NF); profit = $NF - $(NF-1); print profit, $6}' tmdb-movies-fixed.csv | sort -nr | head -10
+```
+
+Diễn viên nào đóng nhiều phim nhất
+```bash
+./actor.sh
+```
+
+Đạo diễn nào có nhiều bộ phim nhất
+```bash
+./director.sh
+```
+
+Thống kê số lượng phim theo các thể loại. Ví dụ có bao nhiêu phim thuộc thể loại Action, bao nhiêu thuộc thể loại Family, ….
+```bash
+./genres.sh
 ```
