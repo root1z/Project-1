@@ -16,7 +16,7 @@ awk -F',' '{
             in_quotes = !in_quotes
         } else if (char == "," && !in_quotes) {
             field_count++
-            if (field_count == 21) {
+            if (field_count == 20) {
                 date_field = current_field
                 break
             }
@@ -26,7 +26,7 @@ awk -F',' '{
         }
     }
 
-    if (field_count >= 21) {
+    if (field_count >= 20) {
         print date_field "," line
     }
 }' tmdb-movies.csv | (head -n1; tail -n+2 | sort -r | cut -d',' -f2-) > revenue_movies.csv

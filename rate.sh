@@ -31,4 +31,4 @@ awk -F',' '{
     if (date_field != "") {
         print date_field "," line
     }
-}' tmdb-movies.csv | (head -n1; tail -n+2 | sort -r | cut -d',' -f2-) > sorted_movies.csv
+}' tmdb-movies-fixed.csv | (head -n1; tail -n+2 | sort -r | cut -d',' -f2-) > rate_movies.csv
